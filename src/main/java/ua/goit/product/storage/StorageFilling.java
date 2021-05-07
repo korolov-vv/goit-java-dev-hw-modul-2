@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class StorageFilling {
-    private static StorageFilling sf = new StorageFilling();
+    private static StorageFilling storageFilling = new StorageFilling();
     private List<Product> list = List.of(
             new Product("A", new BigDecimal("1.25"), new BigDecimal("3.00"), 3),
             new Product("B", new BigDecimal("4.25"), null, null),

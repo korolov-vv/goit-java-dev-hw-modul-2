@@ -1,12 +1,11 @@
 package ua.goit.product.cart;
 
+import ua.goit.product.Product;
+import ua.goit.product.ProductException;
 import ua.goit.product.storage.ProductsStorage;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -20,20 +19,25 @@ public class Cart {
         this.shoppingList = shoppingList;
     }
 
-    public Map<String, Long> separateProducts() {
-        Map<String, Long> cart;
+    public Map<Product, Long> separateProducts() {
+        Map<Product, Long> cart;
         cart = Arrays.stream(shoppingList.split(""))
+                .map(products::getProduct)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return cart;
     }
 
     public BigDecimal calculateTotalCost() {
-        Map<String, Long> thisCart = separateProducts();
-        Iterator<Map.Entry<String, Long>> i = thisCart.entrySet().iterator();
-        BigDecimal totalCost = new BigDecimal("0");
-        while (i.hasNext()) {
-            totalCost.add(products.getProduct(i.toString()).calculateProductCost(thisCart.get(i)));
-        }
-        return totalCost;
+        Map<Product, Long> thisCart = separateProducts();
+        Set<Product> prod = thisCart.keySet();
+        final BigDecimal[] totalCost = {new BigDecimal("0")};
+
+        prod.forEach((el) -> {
+                    long quantity = thisCart.get(el);
+                    totalCost[0] = totalCost[0].add(el.calculateProductCost(quantity));
+                }
+        );
+        System.out.println("Total for " + shoppingList + " " + totalCost[0]);
+        return totalCost[0];
     }
 }

@@ -1,6 +1,7 @@
 package ua.goit.product.storage;
 
 import ua.goit.product.Product;
+import ua.goit.product.ProductException;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,6 +20,9 @@ public class ProductsStorage implements Storage {
 
     @Override
     public Product getProduct(String name) {
-        return storage.get(name);
+        if (!storage.containsKey(name)){
+            throw new ProductException("The product " + name + " is not found in the storage");
+        }
+       return storage.get(name);
     }
 }

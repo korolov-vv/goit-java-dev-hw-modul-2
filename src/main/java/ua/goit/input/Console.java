@@ -2,6 +2,7 @@ package ua.goit.input;
 
 import java.util.Scanner;
 
+
 public class Console implements View {
     private Scanner scanner;
 

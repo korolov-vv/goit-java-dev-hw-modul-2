@@ -31,30 +31,28 @@ public class Product {
     public BigDecimal calculateProductCost(long quant) {
         long numOfPromoPrices;
         long numOfRegularPrices;
-        if (promoQuantity.isPresent()) {
-            numOfPromoPrices = quant / promoQuantity.get();
-            numOfRegularPrices = quant % promoQuantity.get();
-        }else{
-            numOfPromoPrices = 0;
-            numOfRegularPrices = quant;
-        }
         BigDecimal productCost;
+
         if (quant < 0) {
             throw new ProductException("Wrong product quantity, must be > 0");
-        }
-        if (quant == 0) {
+        } else if (quant == 0) {
             productCost = new BigDecimal(0);
             return productCost;
-        }
-        if(promoPrice.isPresent()) {
-            if (numOfRegularPrices == 0) {
-                productCost = promoPrice.get().multiply(new BigDecimal(numOfPromoPrices));
+        } else if (promoQuantity.isPresent()) {
+
+            if (quant < promoQuantity.get()) {
+                productCost = regularPrice.multiply(new BigDecimal(quant));
             } else {
-                productCost = promoPrice.get().multiply(new BigDecimal(numOfPromoPrices).add(regularPrice.multiply(new BigDecimal(numOfRegularPrices))));
+                numOfPromoPrices = quant / promoQuantity.get();
+                numOfRegularPrices = quant % promoQuantity.get();
+                productCost = promoPrice.get().multiply(new BigDecimal(numOfPromoPrices).add(
+                        regularPrice.multiply(new BigDecimal(numOfRegularPrices))
+                ));
             }
-        }else {
-            productCost = regularPrice.multiply(new BigDecimal(numOfRegularPrices));
+        } else {
+            productCost = regularPrice.multiply(new BigDecimal(quant));
         }
-            return productCost;
+        System.out.println("Product " + name + " = " + productCost);
+        return productCost;
     }
 }
