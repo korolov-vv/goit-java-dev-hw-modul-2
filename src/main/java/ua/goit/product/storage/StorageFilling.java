@@ -15,12 +15,12 @@ public class StorageFilling {
     );
 
     public StorageFilling() {
-        fillStorage();
+        fillStorage(list);
     }
 
-    public void fillStorage() {
-        for (Product product : list) {
-            ProductsStorage.getProductsStorage().addToStorage(product);
+    public void fillStorage(List<Product> listOfProducts) {
+        for (Product product : listOfProducts) {
+                ProductsStorage.getProductsStorage().addToStorage(product);
         }
     }
 }

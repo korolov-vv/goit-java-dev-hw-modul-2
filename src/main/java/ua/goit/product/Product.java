@@ -29,8 +29,7 @@ public class Product {
     }
 
     public BigDecimal calculateProductCost(long quant) {
-        long numOfPromoPrices;
-        long numOfRegularPrices;
+
         BigDecimal productCost;
 
         if (quant < 0) {
@@ -43,11 +42,11 @@ public class Product {
             if (quant < promoQuantity.get()) {
                 productCost = regularPrice.multiply(new BigDecimal(quant));
             } else {
-                numOfPromoPrices = quant / promoQuantity.get();
-                numOfRegularPrices = quant % promoQuantity.get();
-                productCost = promoPrice.get().multiply(new BigDecimal(numOfPromoPrices).add(
-                        regularPrice.multiply(new BigDecimal(numOfRegularPrices))
-                ));
+                long numOfPromoPrices = quant / promoQuantity.get();
+                long numOfRegularPrices = quant % promoQuantity.get();
+                BigDecimal promocost = promoPrice.get().multiply(new BigDecimal(numOfPromoPrices));
+                BigDecimal regularcost = regularPrice.multiply(new BigDecimal(numOfRegularPrices));
+                productCost = promocost.add(regularcost);
             }
         } else {
             productCost = regularPrice.multiply(new BigDecimal(quant));
