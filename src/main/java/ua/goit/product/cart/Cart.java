@@ -23,15 +23,17 @@ public class Cart {
         Map<Product, Long> cart;
         cart = Arrays.stream(shoppingList.split(""))
                 .map((s) -> {
-                    Product product = null;
+                    Product product;
                             try {
                                 product = products.getProduct(s);
                             } catch (ProductException e) {
                                 System.out.println(e.getMessage());
+                                product = new Product(s, new BigDecimal("0"), null, null);
                             }
                             return product;
                         })
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
         return cart;
     }
 
@@ -42,11 +44,11 @@ public class Cart {
 
         prod.forEach((el) -> {
                     long quantity = thisCart.get(el);
- //                   try {
+                    try {
                         totalCost[0] = totalCost[0].add(el.calculateProductCost(quantity));
-/*                    }catch (ProductException e){
+                    }catch (NullPointerException e){
                         System.out.println(e.getMessage());
-                    }*/
+                    }
                 }
         );
 //        System.out.println("Total coast for " + shoppingList + " " + totalCost[0]);

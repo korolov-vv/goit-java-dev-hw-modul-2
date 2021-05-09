@@ -47,7 +47,9 @@ public class IntegrationTests {
         //When
         Application.main(new String[0]);
         //Then
-//        assertEquals("", getActualResult());
+        assertEquals("Please enter products:\n" +
+                "The product X is not found\n" +
+                "Total coast for aaacccdbx = 11.00\n", getActualResult());
     }
 
     @Test

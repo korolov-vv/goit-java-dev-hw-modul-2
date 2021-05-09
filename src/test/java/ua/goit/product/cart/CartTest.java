@@ -1,6 +1,5 @@
 package ua.goit.product.cart;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ua.goit.product.Product;
@@ -35,7 +34,6 @@ public class CartTest {
         //When
         Cart cart = new Cart("AABBDCDf");
         //Then
-        Assert.assertThrows("", NullPointerException.class,
-                cart::calculateTotalCost);
+        assert cart.calculateTotalCost().equals(new BigDecimal("13.50"));
     }
 }
