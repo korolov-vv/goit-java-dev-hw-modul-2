@@ -27,7 +27,7 @@ public class Cart {
                             try {
                                 product = products.getProduct(s);
                             } catch (ProductException e) {
-                                e.printStackTrace();
+                                System.out.println(e.getMessage());
                             }
                             return product;
                         })
@@ -42,14 +42,14 @@ public class Cart {
 
         prod.forEach((el) -> {
                     long quantity = thisCart.get(el);
-                    try {
+ //                   try {
                         totalCost[0] = totalCost[0].add(el.calculateProductCost(quantity));
-                    }catch (ProductException e){
-                        e.printStackTrace();
-                    }
+/*                    }catch (ProductException e){
+                        System.out.println(e.getMessage());
+                    }*/
                 }
         );
-        System.out.println("Total for " + shoppingList + " " + totalCost[0]);
+//        System.out.println("Total coast for " + shoppingList + " " + totalCost[0]);
         return totalCost[0];
     }
 }

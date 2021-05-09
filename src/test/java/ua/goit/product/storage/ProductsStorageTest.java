@@ -14,18 +14,18 @@ public class ProductsStorageTest {
     Product product = new Product("P", new BigDecimal("1"), new BigDecimal("10"), 11);
 
     @Before
-    public void fillTestStorage(){
+    public void fillTestStorage() {
         testStorage.addToStorage(product);
     }
 
     @Test
-    public void testAddToStorage_HappyPath(){
+    public void testAddToStorage_HappyPath() {
         //Then
         assert testStorage.getProduct(product.getName()).equals(product);
     }
 
     @Test
-    public void testAddToStorage_TheProductHasAlreadyExistInStorage(){
+    public void testAddToStorage_TheProductHasAlreadyExistInStorage() {
         //When
         testStorage.addToStorage(product);
         //Then
@@ -35,7 +35,7 @@ public class ProductsStorageTest {
     }
 
     @Test
-    public void testAddToStorage_TheProductIsNull(){
+    public void testAddToStorage_TheProductIsNull() {
         //When
         product = null;
         //Then
@@ -44,7 +44,7 @@ public class ProductsStorageTest {
     }
 
     @Test
-    public void testGetProduct_HappyPath(){
+    public void testGetProduct_HappyPath() {
         //When
         Product thisProduct = testStorage.getProduct(product.getName());
         //Then
@@ -52,11 +52,11 @@ public class ProductsStorageTest {
     }
 
     @Test
-    public void testGetProduct_TheProductDoesNotExistInStorage(){
+    public void testGetProduct_TheProductDoesNotExistInStorage() {
         //When
         String productName = "Z";
         //Then
-        Assert.assertThrows("The product Z is not found in the storage", ProductException.class,
+        Assert.assertThrows("", ProductException.class,
                 () -> testStorage.getProduct(productName));
     }
 }

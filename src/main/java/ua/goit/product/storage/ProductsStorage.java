@@ -21,7 +21,7 @@ public class ProductsStorage implements Storage {
     @Override
     public Product getProduct(String name) {
         if (!storage.containsKey(name)){
-            throw new ProductException("The product " + name + " is not found in the storage");
+            throw new ProductException("The product " + name + " is not found");
         }
        return storage.get(name);
     }

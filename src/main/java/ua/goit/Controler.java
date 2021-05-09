@@ -18,9 +18,13 @@ public class Controler {
     }
 
     public void run() {
-        console.write("Please enter products:");
-        String products = console.read();
+            console.write("Please enter products:");
+            String products = console.read();
+        while (products.equals("")){
+            console.write("Please enter products:");
+            products = console.read();
+        }
         Cart thisCart = new Cart(products.toUpperCase(Locale.ROOT));
-        System.out.println(thisCart.calculateTotalCost());
+        System.out.println("Total coast for " + products + " = " + thisCart.calculateTotalCost());
     }
 }

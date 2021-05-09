@@ -51,7 +51,6 @@ public class Product {
         } else {
             productCost = regularPrice.multiply(new BigDecimal(quant));
         }
-        System.out.println("Product " + name + " = " + productCost);
         return productCost;
     }
 }

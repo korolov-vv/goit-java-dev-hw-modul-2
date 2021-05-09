@@ -1,6 +1,5 @@
-package ua.goit;
+package ua.goit.integration;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 public class ConfigurableInputStream extends InputStream {
